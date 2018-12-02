@@ -227,15 +227,64 @@ func (this *GLTF) Compiler(gltfBytes []byte) error {
 										}
 										temp.Samplers = append(temp.Samplers, temp_s)
 									}
-
 									break
 								}
 							}
 						}
 						this.Animations = append(this.Animations, temp)
 					}
+					break
 				}
-
+			case "asset":
+				{
+					for i, iv := range v.(map[string]interface{}) {
+						switch i {
+						case "generator":
+							{
+								this.Asset.Generator = iv.(string)
+								break
+							}
+						case "version":
+							{
+								this.Asset.Version = iv.(string)
+								break
+							}
+						}
+					}
+					break
+				}
+			case "bufferViews":
+				{
+					for _, iv := range v.([]interface{}) {
+						var temp bufferViews.T
+						for j, jv := range iv.(map[string]interface{}) {
+							switch j {
+							case "buffer":
+								{
+									temp.Buffer = int(jv.(float64))
+									break
+								}
+							case "byteLength":
+								{
+									temp.ByteLength = int(jv.(float64))
+									break
+								}
+							case "byteOffset":
+								{
+									temp.ByteOffset = int(jv.(float64))
+									break
+								}
+							case "target":
+								{
+									temp.Target = int(jv.(float64))
+									break
+								}
+							}
+						}
+						this.BufferViews = append(this.BufferViews, temp)
+					}
+					break
+				}
 			}
 
 		}
