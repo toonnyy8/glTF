@@ -17,7 +17,7 @@ func main() {
 
 	t.Compiler(bs)
 
-	fmt.Println(t.Images[0])
+	fmt.Println(t.Materials[0])
 
 	return
 }

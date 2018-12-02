@@ -329,6 +329,48 @@ func (this *GLTF) Compiler(gltfBytes []byte) error {
 					}
 					break
 				}
+			case "materials":
+				{
+					for _, iv := range v.([]interface{}) {
+						var temp materials.T
+						for j, jv := range iv.(map[string]interface{}) {
+							switch j {
+							case "name":
+								{
+									temp.Name = jv.(string)
+									break
+								}
+							case "pbrMetallicRoughness":
+								{
+									for l, lv := range jv.(map[string]interface{}) {
+										switch l {
+										case "baseColorFactor":
+											{
+												for m, mv := range lv.([]interface{}) {
+													temp.PbrMetallicRoughness.BaseColorFactor[m] = mv.(float64)
+												}
+												break
+											}
+										case "metallicFactor":
+											{
+												temp.PbrMetallicRoughness.MetallicFactor = lv.(float64)
+												break
+											}
+										case "roughnessFactor":
+											{
+												temp.PbrMetallicRoughness.RoughnessFactor = lv.(float64)
+												break
+											}
+										}
+									}
+									break
+								}
+							}
+						}
+						this.Materials = append(this.Materials, temp)
+					}
+					break
+				}
 			}
 
 		}
