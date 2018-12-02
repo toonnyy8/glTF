@@ -17,7 +17,7 @@ func main() {
 
 	t.Compiler(bs)
 
-	fmt.Println(t.Buffers[0])
+	fmt.Println(t.Images[0])
 
 	return
 }

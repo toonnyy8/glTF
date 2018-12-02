@@ -307,6 +307,28 @@ func (this *GLTF) Compiler(gltfBytes []byte) error {
 					}
 					break
 				}
+			case "images":
+				{
+					for _, iv := range v.([]interface{}) {
+						var temp images.T
+						for j, jv := range iv.(map[string]interface{}) {
+							switch j {
+							case "name":
+								{
+									temp.Name = jv.(string)
+									break
+								}
+							case "uri":
+								{
+									temp.Uri = jv.(string)
+									break
+								}
+							}
+						}
+						this.Images = append(this.Images, temp)
+					}
+					break
+				}
 			}
 
 		}
