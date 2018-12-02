@@ -17,7 +17,7 @@ func main() {
 
 	t.Compiler(bs)
 
-	fmt.Println(t.BufferViews[3])
+	fmt.Println(t.Buffers[0])
 
 	return
 }
